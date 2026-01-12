@@ -1,0 +1,29 @@
+{
+  "name": "comdicophoto-tw411",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+  "css:watch": "tailwindcss -i assets/css/tailwind.css -o assets/css/main.css --watch",
+  "css:build": "tailwindcss -i assets/css/tailwind.css -o assets/css/main.css",
+  "eleventy": "eleventy --serve --watch --port=8080",
+  "eleventy:build": "eleventy",
+  "build": "npm run css:build && npm run eleventy:build",
+  "start": "concurrently \"npm run css:watch\" \"npm run eleventy\"",
+  "debug": "cross-env DEBUG=Eleventy* eleventy --serve --watch --no-incremental"
+},
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@11ty/eleventy": "^3.1.2",
+    "@11ty/eleventy-plugin-handlebars": "^1.0.0",
+    "concurrently": "^9.2.0",
+    "cross-env": "^7.0.3",
+    "handlebars": "^4.7.8",
+    "tailwindcss": "^4.1.11"
+  },
+  "dependencies": {
+    "@tailwindcss/cli": "^4.1.11"
+  }
+}

@@ -1,0 +1,35 @@
+<section class="py-12">
+  <div class="relative group max-w-3xl mx-auto overflow-visible p-2">
+    <!-- 1) Scroll-snap container -->
+    <div
+      id="hero-carousel"
+      class="flex overflow-x-auto overflow-y-hidden scrollbar-hide snap-x snap-mandatory"
+    >
+      {{#each heroImages}}
+        <div
+          class="hero-slide flex-shrink-0 w-full snap-center p-[6px] bg-black"
+        >
+          <img
+            src="{{this.src}}"
+            alt="{{this.alt}}"
+            class="w-full h-auto object-contain"
+          />
+        </div>
+      {{/each}}
+    </div>
+
+    <!-- 2) Arrows -->
+    <button
+      id="prev-btn"
+      class="absolute -left-8 top-1/2 -translate-y-1/2 bg-black/50 text-white p-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+    >&larr;</button>
+    <button
+      id="next-btn"
+      class="absolute -right-8 top-1/2 -translate-y-1/2 bg-black/50 text-white p-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+    >&rarr;</button>
+  </div>
+
+  <!-- 3) pagination dots -->
+    <div id="hero-dots" class="flex justify-center space-x-2 mt-4"></div>
+  </div>
+</section>

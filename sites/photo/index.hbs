@@ -1,0 +1,71 @@
+---
+layout: layouts/base.hbs
+title: "Home"
+heroImages:
+  - src: "/assets/images/hero1.jpg"
+    alt: "First shot"
+  - src: "/assets/images/hero2.jpg"
+    alt: "Second shot"
+  - src: "/assets/images/hero3.jpg"
+    alt: "Third shot"
+  # etc…
+---
+<main>
+{{> hero }}
+
+
+  
+  </div>
+
+{{!-- GALLERY --}}
+
+<section class="md:pt-8 pb-10">
+  {{!-- {{> section-header header-title="Gallery"}} --}}
+  <div class="max-w-6xl mx-auto px-4">
+    {{!-- or class="bg-gray-700" --}}
+    
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-5 p-5">
+      <!-- Card 1 -->
+      <div class="space-y-2">
+     
+        <a href="gallery/street/" class=""> <img src="/assets/images/gallery-street.png" alt="Street Photography"  class="hover:border-2 w-full"></a>
+        <h3 class="text-lg font-bold font-display text-blue">Street Photography</h3>
+        <p class="text-gray-300 text-sm font-sans">
+          Body text for whatever you’d like to add more to the subheading.
+        </p>
+      </div>
+      <!-- Card 2 -->
+      <div class="space-y-2">
+        <a href="gallery/my-rolleiflex/"><img src="/assets/images/gallery-myrolleiflex.png" alt="My Rolleiflex" class="w-full hover:border-2"></a>
+        <h3 class="text-lg font-bold font-display text-blue">My Rolleiflex</h3>
+        <p class="text-gray-300 text-sm font-sans">
+          Body text for whatever you’d like to expand on the main point.
+        </p>
+      </div>
+      <!-- Card 3 -->
+      <div class="space-y-2">
+        <a href="gallery/portraits/"><img src="/assets/images/gallery-portraits.png" alt="Portraits" class="w-full hover:border-2"></a>
+        <h3 class="text-lg font-bold font-display text-blue">Portraits</h3>
+        <p class="text-gray-300 text-sm font-sans">
+          Body text for whatever you’d like to share more.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+{{!-- ABOUT --}}
+
+<section class="bg-gray-900 pb-10 pt-4 md:pt-8">
+  {{!-- {{> section-header header-title="About"}} --}}
+  <div class="prose prose-invert max-w-3xl mx-auto px-4 pb-16 text-gray-300 leading-loose">
+     
+    <p>
+      David Comdico is a photographer influenced by documentary traditions and contemporary visual culture 
+      and whose work explores the subtle tension between the ordinary and the extraordinary. With an eye for 
+      moments that might otherwise slip by unnoticed, David’s images often linger on the edges of urban life, 
+      street scenes, and fleeting human gestures.</p>
+    <p>If you are interesting in purchasing a unique print, would like to schedule a shoot, or have a question please <a href="/contact/" class="text-blue">send a message</a>.</p>
+  </div>
+</section>
+</main>

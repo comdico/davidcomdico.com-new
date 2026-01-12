@@ -1,0 +1,76 @@
+/* ① Pull in all of Tailwind’s layers */
+@import "tailwindcss";
+
+/* ② Define your design tokens inline */
+@theme {
+  --color-gray-700: #505050;
+  --color-gray-800: #212323;
+  --color-gray-900: #1b1c1c;
+  --color-blue: #5ec5f3;
+  --color-white: #f8f8f0;
+
+  --font-display: "News Cycle", serif;
+  --font-sans: system-ui, sans-serif;
+}
+
+/* ③ Your custom layers */
+@layer base {
+  html,
+  body {
+    overflow-x: hidden;
+    touch-action: pan-y;
+    -webkit-overflow-scrolling: touch;
+  }
+  p {
+    margin-bottom: 1.1rem;
+  }
+}
+
+/* Component-level overrides */
+@layer components {
+  /* Hero slides & dots */
+  .hero-slide {
+    @apply p-[6px] bg-black;
+  }
+  .hero-slide img {
+    @apply rounded-none;
+  }
+  .hero-dot {
+    @apply w-2 h-2 rounded-full bg-gray-700 transition-opacity duration-200;
+  }
+  .hero-dot-active {
+    @apply bg-white;
+  }
+
+  /* Masonry columns */
+  .columns-2 {
+    column-count: 2;
+  }
+  @screen md {
+    .columns-3 {
+      column-count: 3;
+    }
+  }
+  .break-inside-avoid {
+    break-inside: avoid;
+  }
+
+  /* Thumbnails: thick blue border on hover & active */
+  .thumb {
+    @apply border-4 border-transparent transition;
+  }
+  .thumb:hover,
+  .thumb.active {
+    border-color: #5ec5f3;
+  }
+}
+
+@layer utilities {
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}

@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="David Comdico is a photographer influenced by documentary traditions and contemporary visual culture. His work explores the subtle tension between the everyday and the extraordinary.">
+  <meta name="author" content="David Comdico">
+  <meta name="keywords" content="photography, documentary, street photography, portraits, urban life, visual culture">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=News+Cycle:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=News+Cycle:wght@400;700&display=swap" rel="stylesheet">
+  {{!-- <link rel="icon" href="/assets/images/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png"> --}}
+
+  <title>{{ title }}</title>
+  <link href="/assets/css/main.css" rel="stylesheet" />
+</head>
+{{!-- Avoids pesky side to side scroll on the window, esp on mobile devices. --}}
+  <body class="overflow-x-hidden overscroll-x-none bg-gray-800 font-sans text-gray-100">
+
+  {{> header }}
+  {{{ content }}}
+  
+  {{> footer }}
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const carousel   = document.getElementById('hero-carousel');
+  const prevBtn    = document.getElementById('prev-btn');
+  const nextBtn    = document.getElementById('next-btn');
+  const dotsCont   = document.getElementById('hero-dots');
+  const slides     = carousel.querySelectorAll('.hero-slide');
+  const slideCount = slides.length;
+  const slideWidth = carousel.clientWidth;
+
+  // 1) Clone ends for looping
+  carousel.insertBefore(slides[slideCount-1].cloneNode(true), carousel.firstChild);
+  carousel.appendChild          (slides[0].cloneNode(true));
+
+  // 2) Jump to real first slide
+  carousel.scrollLeft = slideWidth;
+
+  // 3) Build dots
+  let dots = [];
+  for (let i = 0; i < slideCount; i++) {
+    let dot = document.createElement('button');
+    dot.className = 'hero-dot';
+    dot.dataset.index = i;
+    dotsCont.appendChild(dot);
+    dots.push(dot);
+
+    // click on dot → jump to slide i
+    dot.addEventListener('click', () => {
+      carousel.scrollTo({ left: (i+1)*slideWidth, behavior: 'smooth' });
+    });
+  }
+
+  // 4) Helpers to update active dot
+  function updateDots() {
+    // figure out which “real” slide we’re on
+    const idx = Math.round(carousel.scrollLeft / slideWidth) - 1;
+    dots.forEach((d, i) => {
+      d.classList.toggle('hero-dot-active', i === ((idx % slideCount + slideCount) % slideCount));
+    });
+  }
+
+  // init active dot
+  updateDots();
+
+  // 5) Arrow handlers
+  nextBtn.addEventListener('click', () => {
+    carousel.scrollBy({ left: slideWidth, behavior: 'smooth' });
+  });
+  prevBtn.addEventListener('click', () => {
+    carousel.scrollBy({ left: -slideWidth, behavior: 'smooth' });
+  });
+
+  // 6) Infinite-loop reset + dot update
+  let timeout;
+  carousel.addEventListener('scroll', () => {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => {
+      const maxScroll = slideWidth*(slideCount+1);
+      if (carousel.scrollLeft >= maxScroll) {
+        carousel.scrollLeft = slideWidth;
+      } else if (carousel.scrollLeft <= 0) {
+        carousel.scrollLeft = slideWidth*slideCount;
+      }
+      updateDots();
+    }, 100);
+  });
+
+  // 7) Advance on slide click
+  carousel.addEventListener('click', e => {
+    if (e.target.closest('.hero-slide')) {
+      nextBtn.click();
+    }
+  });
+});
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var menuToggle    = document.getElementById('menu-toggle');
+  var mobileMenu    = document.getElementById('mobile-menu');
+  var galleryToggle = document.getElementById('gallery-toggle');
+  var galleryMenu   = document.getElementById('gallery-menu');
+
+  if (menuToggle && mobileMenu) {
+    menuToggle.addEventListener('click', function() {
+      mobileMenu.classList.toggle('hidden');
+    });
+  }
+
+  if (galleryToggle && galleryMenu) {
+    galleryToggle.addEventListener('click', function(e) {
+      e.stopPropagation();
+      galleryMenu.classList.toggle('hidden');
+    });
+
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('#gallery-toggle')) {
+        galleryMenu.classList.add('hidden');
+      }
+    });
+  }
+});
+</script>
+
+{{!-- Gallery Lightbox --}}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var gallery       = document.querySelector('.gallery');
+  var lightbox      = document.getElementById('lightbox');
+  var lightboxImg   = document.getElementById('lightbox-img');
+  var thumbnails    = [];
+  var currentIndex  = 0;
+
+  if (!gallery || !lightbox) return;
+
+  // Build an array of thumbnail <img> elements
+  thumbnails = Array.prototype.slice.call(
+    gallery.querySelectorAll('img[data-full]')
+  );
+
+  // Open lightbox on thumbnail click
+  gallery.addEventListener('click', function(e) {
+    var thumb = e.target.closest('img[data-full]');
+    if (!thumb) return;
+
+    currentIndex = thumbnails.indexOf(thumb);
+    lightboxImg.src = thumb.getAttribute('data-full');
+    lightboxImg.alt = thumb.alt;
+    lightbox.classList.remove('hidden');
+  });
+
+  // Advance to next image when clicking the lightbox image
+  lightboxImg.addEventListener('click', function(e) {
+    e.stopPropagation(); // don’t close the overlay
+    currentIndex = (currentIndex + 1) % thumbnails.length;
+    var nextThumb = thumbnails[currentIndex];
+    lightboxImg.src = nextThumb.getAttribute('data-full');
+    lightboxImg.alt = nextThumb.alt;
+  });
+
+  // Close when clicking outside the image
+  lightbox.addEventListener('click', function(e) {
+    if (e.target === lightbox) {
+      lightbox.classList.add('hidden');
+      lightboxImg.src = "";
+    }
+  });
+});
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var toggle    = document.getElementById('share-toggle');
+  var dropdown  = document.getElementById('share-dropdown');
+  if (!toggle || !dropdown) return;
+
+  // Build share URLs
+  var shareUrl  = encodeURIComponent(window.location.href);
+  var shareText = encodeURIComponent(document.title);
+
+  var serviceUrls = {
+    twitter:  'https://twitter.com/intent/tweet?url=' + shareUrl + '&text=' + shareText,
+    facebook: 'https://www.facebook.com/sharer/sharer.php?u=' + shareUrl,
+    whatsapp: 'https://api.whatsapp.com/send?text=' + shareText + '%20' + shareUrl,
+    email:    'mailto:?subject=' + shareText + '&body=' + shareUrl
+  };
+
+  // Populate each link and open in new tab
+  dropdown.querySelectorAll('a[data-service]').forEach(function(a) {
+    var svc = a.dataset.service;
+    a.href = serviceUrls[svc] || '#';
+    a.setAttribute('target','_blank');
+    a.setAttribute('rel','noopener');
+  });
+
+  // Toggle dropdown
+  toggle.addEventListener('click', function(e) {
+    e.stopPropagation();
+    dropdown.classList.toggle('hidden');
+  });
+
+  // Close when clicking outside
+  document.addEventListener('click', function() {
+    dropdown.classList.add('hidden');
+  });
+});
+</script>
+
+</body>
+</html>
