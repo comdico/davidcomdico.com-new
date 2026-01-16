@@ -2,11 +2,12 @@
   "name": "davidcomdico.com-new",
   "private": true,
   "scripts": {
-    "build": "npm run build:photo && npm run copy:photo && npm run build:main",
-    "build:photo": "npm --prefix sites/photo ci && npm --prefix sites/photo run build",
+   "build": "npm run build:photo && npm run copy:photo && npm run build:music && npm run copy:music && npm run build:main",
+    "build:photo": "npm --prefix sites/photo install && npm --prefix sites/photo run build",
     "copy:photo": "rm -rf sites/main/public/photography && mkdir -p sites/main/public/photography && cp -R sites/photo/_site/* sites/main/public/photography/",
-    "build:main": "npm --prefix sites/main ci && npm --prefix sites/main run build",
-
+    "build:music": "echo \"music is static (served from sites/music/public)\"",
+    "copy:music": "rm -rf sites/main/public/music && mkdir -p sites/main/public/music && cp -R sites/music/public/* sites/main/public/music/",
+    "build:main": "npm --prefix sites/main install && npm --prefix sites/main run build",
     "dev:main": "npm --prefix sites/main run dev",
     "dev:photo": "npm --prefix sites/photo run start"
   }
