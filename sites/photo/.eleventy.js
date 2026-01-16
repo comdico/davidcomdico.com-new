@@ -1,20 +1,20 @@
 const hbPlugin = require("@11ty/eleventy-plugin-handlebars");
-const { EleventyHtmlBasePlugin } = require("@11ty/eleventy");
-
 
 module.exports = function (eleventyConfig) {
-  // Re-run the entire config (and plugin registration) any time a partial changes
-  eleventyConfig.addWatchTarget("./_includes/", { resetConfig: true });
+  const isProd = process.env.ELEVENTY_ENV === "production";
 
-  // Handlebars plugin (will re-register partials on each config run)
+  // Handlebars partials: watch and re-register on change
+  eleventyConfig.addWatchTarget("./_includes/", { resetConfig: true });
   eleventyConfig.addPlugin(hbPlugin);
 
-  eleventyConfig.addPlugin(EleventyHtmlBasePlugin);
-
-  // Your other watch targets, passthroughs, and Browsersync settings…
+  // Watch CSS output folder (Tailwind writes here)
   eleventyConfig.addWatchTarget("./assets/css/");
+
+  // Passthrough copies so /assets/... exists in _site
   eleventyConfig.addPassthroughCopy("assets/css/main.css");
   eleventyConfig.addPassthroughCopy("assets/images");
+
+  // Dev server (Eleventy uses BrowserSync underneath)
   eleventyConfig.setBrowserSyncConfig({
     server: { baseDir: "_site" },
     files: ["_site/**/*.{html,css,js}"],
@@ -29,6 +29,7 @@ module.exports = function (eleventyConfig) {
     htmlTemplateEngine: "hbs",
     markdownTemplateEngine: "hbs",
     dataTemplateEngine: "hbs",
-    pathPrefix: "/photography/"
+    // Only prefix in production builds
+    pathPrefix: isProd ? "/photography/" : "/"
   };
 };

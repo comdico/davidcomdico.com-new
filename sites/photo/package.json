@@ -6,7 +6,7 @@
   "css:watch": "tailwindcss -i assets/css/tailwind.css -o assets/css/main.css --watch",
   "css:build": "tailwindcss -i assets/css/tailwind.css -o assets/css/main.css",
   "eleventy": "eleventy --serve --watch --port=8080",
-  "eleventy:build": "eleventy",
+  "eleventy:build": "cross-env ELEVENTY_ENV=production eleventy",
   "build": "npm run css:build && npm run eleventy:build",
   "start": "concurrently \"npm run css:watch\" \"npm run eleventy\"",
   "debug": "cross-env DEBUG=Eleventy* eleventy --serve --watch --no-incremental"
