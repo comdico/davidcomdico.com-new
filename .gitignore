@@ -2,3 +2,5 @@
 **/dist
 **/_site
 .DS_Store
+sites/main/public/photography/
+sites/main/public/music/
