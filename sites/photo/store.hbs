@@ -31,13 +31,13 @@ stripeLink: "https://buy.stripe.com/test_8x2bIUfvUdC9c7meUY2Ji00"
     <!-- Main preview -->
     <div class="w-full md:w-3/4">
       {{#with (lookup product.images 0) as |img|}}
-        <img
-          id="product-main"
-          src="{{img.full}}"
-          alt="{{img.alt}}"
-          class="w-full h-auto rounded shadow"
-        />
-      {{/with}}
+  <img
+    id="product-main"
+    src="{{ url img.full }}"
+    alt="{{img.alt}}"
+    class="w-full h-auto rounded shadow"
+  />
+{{/with}}
     </div>
 
     <!-- Thumbnails -->
@@ -46,14 +46,14 @@ stripeLink: "https://buy.stripe.com/test_8x2bIUfvUdC9c7meUY2Ji00"
       class="flex flex-row md:flex-col w-full md:w-1/4 space-x-4 md:space-x-0 md:space-y-4 overflow-x-auto md:overflow-y-auto"
     >
       {{#each product.images}}
-        <img
-          class="thumb flex-shrink-0 w-20 h-20 object-cover rounded cursor-pointer border-4 border-transparent"
-          src="{{this.thumbnail}}"
-          data-full="{{this.full}}"
-          data-alt="{{this.alt}}"
-          alt="{{this.alt}}"
-        />
-      {{/each}}
+  <img
+    class="thumb flex-shrink-0 w-20 h-20 object-cover rounded cursor-pointer border-4 border-transparent"
+    src="{{ url this.thumbnail }}"
+    data-full="{{ url this.full }}"
+    data-alt="{{this.alt}}"
+    alt="{{this.alt}}"
+  />
+{{/each}}
     </div>
   </div>
 
@@ -71,12 +71,21 @@ stripeLink: "https://buy.stripe.com/test_8x2bIUfvUdC9c7meUY2Ji00"
 </section>
 
 <script>
-  document.addEventListener('DOMContentLoaded', function () { var mainImg =
-  document.getElementById('product-main'); var thumbs =
-  document.querySelectorAll('#product-thumbs .thumb'); if (!mainImg ||
-  !thumbs.length) return; thumbs[0].classList.add('active');
-  thumbs.forEach(function (thumb) { thumb.addEventListener('click', function ()
-  { mainImg.src = thumb.getAttribute('data-full'); mainImg.alt =
-  thumb.getAttribute('data-alt'); thumbs.forEach(function (t) {
-  t.classList.remove('active'); }); thumb.classList.add('active'); }); }); });
+document.addEventListener('DOMContentLoaded', function () {
+  var mainImg = document.getElementById('product-main');
+  var thumbs = document.querySelectorAll('#product-thumbs .thumb');
+  if (!mainImg || !thumbs.length) return;
+
+  thumbs[0].classList.add('active');
+
+  thumbs.forEach(function (thumb) {
+    thumb.addEventListener('click', function () {
+      mainImg.src = thumb.getAttribute('data-full');
+      mainImg.alt = thumb.getAttribute('data-alt');
+
+      thumbs.forEach(function (t) { t.classList.remove('active'); });
+      thumb.classList.add('active');
+    });
+  });
+});
 </script>
