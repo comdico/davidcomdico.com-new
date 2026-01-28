@@ -1,17 +1,18 @@
-.wrapper{
+.wrapper {
   /*width: 800px;*/
-  width:100%;
+  width: 100%;
   margin: 0 auto;
 }
-.sc-player{
+.sc-player {
   /*width: 800px;*/
-  width:100%;
+  width: 100%;
   height: 8em;
   position: relative;
   margin-bottom: 20px;
 }
 
-.sc-player ol, .sc-player li{
+.sc-player ol,
+.sc-player li {
   margin: 0;
   padding: 0;
   list-style-position: inside;
@@ -19,7 +20,7 @@
 
 /* Artworks */
 
-.sc-player .sc-artwork-list{
+.sc-player .sc-artwork-list {
   width: 100%;
   height: 50%;
   background-color: #transparent;
@@ -28,17 +29,18 @@
   display: none;
 }
 
-.sc-player .sc-artwork-list li{
+.sc-player .sc-artwork-list li {
   list-style-type: none;
   display: none;
 }
 
-.sc-player .sc-artwork-list li.active{
+.sc-player .sc-artwork-list li.active {
   list-style-type: none;
   display: block;
 }
 
-.sc-player .sc-artwork-list li img, .sc-player .sc-artwork-list li div{
+.sc-player .sc-artwork-list li img,
+.sc-player .sc-artwork-list li div {
   list-style-type: none;
   width: 380px;
   height: 380px;
@@ -48,7 +50,7 @@
 
 /* controls */
 
-.sc-player .sc-controls{
+.sc-player .sc-controls {
   position: absolute;
   width: 40px;
   height: 40px;
@@ -59,21 +61,21 @@
   z-index: 399;
 }
 
-.sc-player .sc-controls a{
+.sc-player .sc-controls a {
   display: block;
   width: 40px;
   height: 40px;
 }
 
-.sc-player .sc-controls a.sc-pause{
+.sc-player .sc-controls a.sc-pause {
   display: none;
 }
 
-.sc-player.playing .sc-controls a.sc-play{
+.sc-player.playing .sc-controls a.sc-play {
   display: none;
 }
 
-.sc-player.playing .sc-controls a.sc-pause{
+.sc-player.playing .sc-controls a.sc-pause {
   display: block;
 }
 
@@ -84,21 +86,22 @@
   top: 0px;
   height: 80px;
   /*width: 800px;*/
-  width:100%;
+  width: 100%;
 }
 
-.sc-scrubber .sc-time-span{
+.sc-scrubber .sc-time-span {
   height: 80px;
   position: relative;
 }
 
-.sc-scrubber .sc-buffer, .sc-scrubber .sc-played{
+.sc-scrubber .sc-buffer,
+.sc-scrubber .sc-played {
   height: 80px;
   position: absolute;
   top: 0;
 }
 
-.sc-scrubber .sc-time-indicators{
+.sc-scrubber .sc-time-indicators {
   position: absolute;
   right: 0;
   top: 30px;
@@ -108,7 +111,7 @@
 
 /* Track listings*/
 
-.sc-player ol.sc-trackslist{
+.sc-player ol.sc-trackslist {
   /*position: absolute;
   float: left;
   width: 100%;
@@ -117,7 +120,7 @@
   display: none;
 }
 
-.sc-player ol.sc-trackslist li{
+.sc-player ol.sc-trackslist li {
   float: left;
   width: 390px;
   cursor: pointer;
@@ -128,35 +131,34 @@
 
 /* Track info*/
 
-.sc-player .sc-info{
+.sc-player .sc-info {
   position: absolute;
   top: 10px;
   left: -5000px;
-  width : 400px;
+  width: 400px;
   padding: 5px;
   height: 200px;
   z-index: 500;
   margin-left: -200px;
 }
 
-.sc-player .sc-info.active{
+.sc-player .sc-info.active {
   left: 50%;
   top: 12%;
 }
 
-
-.sc-player .sc-info-toggle{
+.sc-player .sc-info-toggle {
   position: absolute;
   top: 10px;
   left: 10px;
   display: none;
 }
 
-.sc-player .sc-info-toggle.active{
+.sc-player .sc-info-toggle.active {
   left: -5000px;
 }
 
-.sc-player .sc-info-close{
+.sc-player .sc-info-close {
   position: absolute;
   top: 10px;
   right: 20px;
@@ -168,10 +170,30 @@
   display: none;
 }
 
-.sc-player-engine-container{
+.sc-player-engine-container {
   width: 1px;
   height: 1px;
   position: fixed;
   top: 2px;
   left: 2px;
+}
+
+/* Audio player baseline */
+.tracks audio {
+  width: 100%;
+  margin-top: 1rem;
+  filter: invert(1) hue-rotate(180deg);
+}
+
+/* Dark section tweaks */
+.is-reversed audio {
+  filter: none;
+}
+html {
+  scroll-behavior: smooth;
+}
+
+/* Your scroll targets are the OUTER sections like <section class="tracks" id="track1"> */
+.tracks[id] {
+  scroll-margin-top: 250px;
 }
