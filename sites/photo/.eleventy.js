@@ -14,6 +14,13 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("assets/css/main.css");
   eleventyConfig.addPassthroughCopy("assets/images");
 
+  eleventyConfig.addHandlebarsHelper("url", function (inputPath) {
+    // normalize to no leading slash
+    const p = String(inputPath || "").replace(/^\/+/, "");
+    const prefix = isProd ? "/photography/" : "/";
+    return (prefix + p).replace(/\/{2,}/g, "/");
+  });
+
   // Dev server (Eleventy uses BrowserSync underneath)
   eleventyConfig.setBrowserSyncConfig({
     server: { baseDir: "_site" },
@@ -30,6 +37,6 @@ module.exports = function (eleventyConfig) {
     markdownTemplateEngine: "hbs",
     dataTemplateEngine: "hbs",
     // Only prefix in production builds
-    pathPrefix: isProd ? "/photography/" : "/"
+    pathPrefix: isProd ? "/photography/" : "/",
   };
 };
