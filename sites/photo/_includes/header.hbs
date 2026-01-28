@@ -1,7 +1,7 @@
 <header class="relative text-gray-100 z-20 md:pb-7 pb:3">
   <div class="max-w-6xl mx-auto flex items-center justify-between p-4">
     <!-- Logo / Brand -->
-    <div class="uppercase"><a href="/" class="font-display font-normal"><span
+    <div class="uppercase"><a href="{{url '/'}}" class="font-display font-normal"><span
           class="tracking-wider"
         >David Comdico</span>
         <br />
@@ -37,7 +37,7 @@
     >
       <ul class="flex flex-col md:flex-row md:space-x-1 uppercase">
         <li>
-          <a href="/" class="block px-4 py-2 md:hover:bg-blue">Home</a>
+          <a href="{{url '/'}}" class="block px-4 py-2 md:hover:bg-blue">Home</a>
         </li>
         <li class="relative ">
           <!-- Gallery toggle -->
@@ -67,7 +67,7 @@
           >
             <li>
               <a
-                href="/gallery/street/"
+                href="{{url '/gallery/street/'}}"
                 class="block text-sm px-4 py-2 ml-2 md:ml-0 md:hover:bg-blue"
               >
                 Street
@@ -75,7 +75,7 @@
             </li>
             <li>
               <a
-                href="/gallery/my-rolleiflex/"
+                href="{{url '/gallery/my-rolleiflex/'}}"
                 class="block px-4 py-2 text-sm ml-2 md:ml-0 md:hover:bg-blue"
               >
                 My Rolleiflex
@@ -83,7 +83,7 @@
             </li>
             <li>
               <a
-                href="/gallery/portraits/"
+                href="{{url '/gallery/portraits/'}}"
                 class="block px-4 py-2 text-sm ml-2 md:ml-0 md:hover:bg-blue"
               >
                 Portraits
@@ -92,14 +92,14 @@
           </ul>
         </li>
         <li>
-          <a href="/store/" class="block px-4 py-2 md:hover:bg-blue">Store</a>
+          <a href="{{url '/store/'}}" class="block px-4 py-2 md:hover:bg-blue">Store</a>
         </li>
         <li>
-          <a href="/about/" class="block px-4 py-2 md:hover:bg-blue">About</a>
+          <a href="{{url '/about/'}}" class="block px-4 py-2 md:hover:bg-blue">About</a>
         </li>
         <li>
           <a
-            href="/contact/"
+            href="{{url '/contact/'}}"
             class="block px-4 py-2 md:hover:bg-blue"
           >Contact</a>
         </li>

@@ -2,8 +2,8 @@
   {{#each images}}
     <div class="break-inside-avoid mb-4">
       <img
-        src="{{this.thumbnail}}"
-        data-full="{{this.full}}"
+        src="{{url this.thumbnail}}"
+        data-full="{{url this.full}}"
         alt="{{this.alt}}"
         class="w-full rounded cursor-pointer"
       />
